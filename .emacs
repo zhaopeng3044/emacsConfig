@@ -6,14 +6,19 @@
 
 ;; put backup or auto save files
 (custom-set-variables
- '(auto-save-file-name-transforms'((".*" "~/.emacs.d/autosaves/" t)))
- '(backup-directory-alist '((".*" ."~/.emacs.d/backups"))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups"))))
+ '(package-selected-packages (quote (pyenv-mode elpy yasnippet))))
 
-(require  'package)
-(package-initialize)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;; config package install
+;;(require  'package)
+;;(package-initialize)
+;;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;
+;;;; config package install
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 		    (not (gnutls-available-p))))
@@ -68,3 +73,25 @@
                   ;; (line-beginning-position (+ 1 arg)))
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
    
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(package-initialize)
+(elpy-enable)
+(pyenv-mode)
+
+
+(defun ssbb-pyenv-hook ()
+"Automatically activates pyenv version if .python-version file exists."
+(f-traverse-upwards
+(lambda (path)
+  (let ((pyenv-version-path (f-expand ".python-version" path)))
+		(if (f-exists? pyenv-version-path)
+				(pyenv-mode-set (s-trim (f-read-text pyenv-version-path 'utf-8))))))))
+
+(add-hook 'find-file-hook 'ssbb-pyenv-hook)
+(add-hook 'before-save-hook 'whitespace-cleanup)
