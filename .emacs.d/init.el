@@ -36,9 +36,9 @@
      "python -mjson.tool" (current-buffer) t)))
 
 ;; insert current date time
-(defun insert-current-time () 
-    "Insert the current time" 
-    (interactive "*") 
+(defun insert-current-time ()
+    "Insert the current time"
+    (interactive "*")
     (insert (current-time-string)))
 
 (global-set-key "\C-xt" 'insert-current-time)
@@ -61,3 +61,6 @@
 
 ;; 关闭auto-insert-mode的确认
 (setq auto-insert-query nil)
+
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
