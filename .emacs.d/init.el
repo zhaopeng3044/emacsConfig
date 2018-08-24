@@ -64,3 +64,7 @@
 
 (require 'py-autopep8)
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
+(electric-pair-mode 1)
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis) ; 只高亮括号
