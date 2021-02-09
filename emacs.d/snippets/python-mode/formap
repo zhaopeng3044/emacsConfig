@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: formap
+# key: formap
+# --
+
+for $1, $2 in $3.items():
+    $4

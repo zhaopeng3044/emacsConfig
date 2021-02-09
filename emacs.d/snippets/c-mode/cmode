@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: cmode
+# key: cmode
+# --
+
+#include <strio.h>
+#include <stdlib.h>

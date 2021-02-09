@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pymain
+# key: pymain
+# --
+
+if __name__ == '__main__':
+    $1
